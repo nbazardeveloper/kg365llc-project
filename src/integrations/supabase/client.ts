@@ -19,11 +19,19 @@ class _SsrWebSocketStub {
   dispatchEvent() { return false; }
 }
 
+// Public config — safe to hardcode (anon key is intentionally public)
+const SUPABASE_URL_DEFAULT = "https://opryabmiksyvtvqnpvqv.supabase.co";
+const SUPABASE_KEY_DEFAULT = "sb_publishable_rlcDB3jUPOvpqGqsrZm9_g_ebN1e2Sx";
+
 function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to process.env for SSR (server-side rendering)
-  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
-  const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
+  const SUPABASE_URL =
+    import.meta.env.VITE_SUPABASE_URL ||
+    process.env.SUPABASE_URL ||
+    SUPABASE_URL_DEFAULT;
+  const SUPABASE_PUBLISHABLE_KEY =
+    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    SUPABASE_KEY_DEFAULT;
 
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
     const missing = [
