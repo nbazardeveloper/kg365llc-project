@@ -1,0 +1,237 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/* Hero Ken Burns zoom — slow scale from 1→1.10 over 22s */
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.10); }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 22s ease-out forwards;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * KG365 LLC design tokens.
+ * Primary accent: #0069b4 (Bishkek blue).
+ * Headings: Playfair Display (serif). Body: Inter (sans).
+ * Loaded via <link> in __root.tsx.
+ */
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-logo: "Bebas Neue", ui-sans-serif, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-sand: var(--sand);
+  --color-overlay: var(--overlay);
+  --color-star: var(--star);
+
+  --shadow-elegant: 0 30px 60px -30px color-mix(in oklab, var(--primary) 35%, transparent);
+  --shadow-soft: 0 10px 30px -15px color-mix(in oklab, var(--ink) 25%, transparent);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Neutral, premium base */
+  --background: oklch(1 0 0);                   /* pure white */
+  --foreground: oklch(0.18 0.01 250);          /* deep ink */
+  --ink: oklch(0.16 0.015 250);
+  --ink-soft: oklch(0.32 0.01 250);
+  --sand: oklch(0.96 0.012 80);
+  --overlay: #001a33;                           /* dark navy hero overlay */
+  --star: oklch(0.82 0.17 80);                  /* amber star / review icons */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.01 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.01 250);
+
+  /* KG365 gold #F9B41F */
+  --primary: oklch(0.814 0.163 79.6);
+  --primary-foreground: oklch(0.18 0.01 250);
+
+  --secondary: oklch(0.95 0.01 250);
+  --secondary-foreground: oklch(0.18 0.01 250);
+  --muted: oklch(0.95 0.01 250);
+  --muted-foreground: oklch(0.46 0.015 250);
+  --accent: oklch(0.814 0.163 79.6);
+  --accent-foreground: oklch(0.18 0.01 250);
+
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.9 0.01 250);
+  --input: oklch(0.9 0.01 250);
+  --ring: oklch(0.814 0.163 79.6);
+}
+
+.dark {
+  --background: oklch(0.14 0.015 250);
+  --foreground: oklch(0.97 0.005 80);
+  --ink: oklch(0.97 0.005 80);
+  --ink-soft: oklch(0.78 0.01 250);
+  --sand: oklch(0.18 0.015 250);
+
+  --card: oklch(0.18 0.015 250);
+  --card-foreground: oklch(0.97 0.005 80);
+  --popover: oklch(0.18 0.015 250);
+  --popover-foreground: oklch(0.97 0.005 80);
+
+  --overlay: #001a33;
+  --star: oklch(0.82 0.17 80);
+
+  --primary: oklch(0.864 0.163 79.6);
+  --primary-foreground: oklch(0.14 0.01 250);
+
+  --secondary: oklch(0.24 0.015 250);
+  --secondary-foreground: oklch(0.97 0.005 80);
+  --muted: oklch(0.24 0.015 250);
+  --muted-foreground: oklch(0.72 0.01 250);
+  --accent: oklch(0.864 0.163 79.6);
+  --accent-foreground: oklch(0.14 0.01 250);
+
+  --destructive: oklch(0.6 0.22 22);
+  --destructive-foreground: oklch(0.97 0 0);
+
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.82 0.16 67.4);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;        /* 18px base */
+    line-height: 1.7;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--color-ink);
+  }
+
+  h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+  h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.15; }
+  h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.2; }
+
+  p { line-height: 1.7; }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+/* Edge-to-edge: sections own their gutters (px-5 md:px-10); container-prose just spans full width. */
+@utility container-prose {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+/*
+ * Geometric hexagon button shape.
+ * Both left and right edges are angled — horizontal elongated hexagon.
+ * Applied via the Button component (shape="hex") as the default.
+ *
+ * Decorative accent lines are rendered via .btn-hex-wrap pseudo-elements,
+ * which wrap the button and are NOT affected by clip-path.
+ */
+@utility btn-hex {
+  clip-path: polygon(22px 0%, calc(100% - 22px) 0%, 100% 50%, calc(100% - 22px) 100%, 22px 100%, 0% 50%);
+  border-radius: 0 !important;
+  padding-inline: 2.25rem; /* compensate for angled edges */
+}
+
+/*
+ * Wrapper that holds the two thin decorative accent lines.
+ * ::before = top-left corner accent  (parallel to top-left slant)
+ * ::after  = bottom-right corner accent (parallel to bottom-right slant)
+ * Both sit in the transparent cut-away corners, outside clip-path scope.
+ */
+.btn-hex-wrap {
+  display: inline-flex;
+  position: relative;
+}
+
+.btn-hex-wrap::before,
+.btn-hex-wrap::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 1.5px;
+  background: var(--color-primary);
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top-left corner accent — pivot from the right-bottom of the line toward the cut */
+.btn-hex-wrap::before {
+  top: 0;
+  left: 0;
+  transform: rotate(-48deg);
+  transform-origin: right bottom;
+}
+
+/* Bottom-right corner accent — mirror of above */
+.btn-hex-wrap::after {
+  bottom: 0;
+  right: 0;
+  transform: rotate(-48deg);
+  transform-origin: left top;
+}
