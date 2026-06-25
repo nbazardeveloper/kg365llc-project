@@ -80,18 +80,39 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "KG365 LLC delivers premium kitchen & bathroom remodeling, tile, flooring, painting, and handyman services across Philadelphia and South Jersey. 20+ years of craftsmanship.",
       },
       { name: "author", content: "KG365 LLC" },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#1a1a1a" },
+
+      /* ── Open Graph ── */
       { property: "og:site_name", content: "KG365 LLC" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
       { property: "og:title", content: "KG365 LLC — Premium Renovations in Philadelphia" },
       {
         property: "og:description",
         content:
           "Kitchen & bathroom remodeling, tile, flooring, painting, and handyman services. 20+ years of experience serving Philadelphia and South Jersey.",
       },
+      { property: "og:url", content: "https://kg365llc.com" },
+      { property: "og:image", content: "https://kg365llc.com/og-image.webp" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "KG365 LLC — Premium home renovations in Philadelphia" },
+
+      /* ── Twitter / X Card ── */
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "KG365 LLC — Premium Renovations in Philadelphia" },
+      {
+        name: "twitter:description",
+        content:
+          "Kitchen & bathroom remodeling, tile, flooring, painting, and handyman services. 20+ years of experience.",
+      },
+      { name: "twitter:image", content: "https://kg365llc.com/og-image.webp" },
+      { name: "twitter:image:alt", content: "KG365 LLC — Premium home renovations in Philadelphia" },
     ],
     links: [
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "canonical", href: "https://kg365llc.com" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -107,10 +128,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "GeneralContractor",
           name: "KG365 LLC",
+          url: "https://kg365llc.com",
+          logo: "https://kg365llc.com/og-image.webp",
+          image: "https://kg365llc.com/og-image.webp",
           description:
-            "Premium home and commercial renovations, remodeling, tile, flooring, painting, and handyman services.",
-          areaServed: ["Philadelphia, PA", "South New Jersey"],
+            "Premium home and commercial renovations, remodeling, tile, flooring, painting, and handyman services in Philadelphia and South Jersey.",
           telephone: "+1-445-333-1193",
+          email: "kg365llc@gmail.com",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Philadelphia",
+            addressRegion: "PA",
+            addressCountry: "US",
+          },
+          areaServed: [
+            { "@type": "City", name: "Philadelphia", sameAs: "https://en.wikipedia.org/wiki/Philadelphia" },
+            { "@type": "AdministrativeArea", name: "South New Jersey" },
+          ],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Renovation Services",
+            itemListElement: [
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Kitchen Remodeling" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Bathroom Remodeling" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Flooring & Tile Installation" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Painting & Drywall" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Handyman Services" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Full Home Renovation" } },
+            ],
+          },
+          sameAs: [],
         }),
       },
     ],

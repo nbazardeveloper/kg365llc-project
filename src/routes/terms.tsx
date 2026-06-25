@@ -5,7 +5,9 @@ export const Route = createFileRoute("/terms")({
     meta: [
       { title: "Terms of Use — KG365 LLC" },
       { name: "description", content: "Terms of Use for KG365 LLC renovation and handyman services." },
+      { name: "robots", content: "noindex, follow" },
     ],
+    links: [{ rel: "canonical", href: "https://kg365llc.com/terms" }],
   }),
   component: TermsPage,
 });

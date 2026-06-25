@@ -5,7 +5,9 @@ export const Route = createFileRoute("/privacy")({
     meta: [
       { title: "Privacy Policy — KG365 LLC" },
       { name: "description", content: "Privacy Policy for KG365 LLC renovation and handyman services." },
+      { name: "robots", content: "noindex, follow" },
     ],
+    links: [{ rel: "canonical", href: "https://kg365llc.com/privacy" }],
   }),
   component: PrivacyPage,
 });

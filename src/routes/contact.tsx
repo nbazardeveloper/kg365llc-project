@@ -17,9 +17,10 @@ export const Route = createFileRoute("/contact")({
         property: "og:description",
         content: "Free consultations for kitchen, bathroom, tile, flooring, painting, and handyman work.",
       },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://kg365llc.com/contact" },
+      { property: "og:image", content: "https://kg365llc.com/og-image.webp" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://kg365llc.com/contact" }],
   }),
   component: ContactPage,
 });

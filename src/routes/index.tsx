@@ -28,15 +28,23 @@ export const Route = createFileRoute("/")({
         content:
           "Premium kitchen remodeling, bathroom remodeling, tile installation, flooring, painting, and handyman services in Philadelphia & South Jersey. 20+ years of craftsmanship.",
       },
-      { property: "og:title", content: "KG365 LLC — Premium Renovations in Philadelphia" },
+      {
+        name: "keywords",
+        content:
+          "kitchen remodeling Philadelphia, bathroom remodeling Philadelphia, home renovation, tile installation, flooring, painting, handyman services, South Jersey renovation, KG365",
+      },
+      { property: "og:title", content: "KG365 LLC — Kitchen, Bathroom & Home Renovations in Philadelphia" },
       {
         property: "og:description",
         content:
-          "Kitchen & bathroom remodeling, tile, flooring, painting, and handyman services. 20+ years of experience.",
+          "Premium kitchen remodeling, bathroom remodeling, tile installation, flooring, painting, and handyman services in Philadelphia & South Jersey. 20+ years of craftsmanship.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://kg365llc.com/" },
+      { property: "og:image", content: "https://kg365llc.com/og-image.webp" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:image", content: "https://kg365llc.com/og-image.webp" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://kg365llc.com/" }],
   }),
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(featuredPortfolioQuery);

@@ -30,26 +30,35 @@ export const Route = createFileRoute("/api/public/leads")({
         }
         const lead = parsed.data;
 
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        const { sendLeadEmail, sendLeadTelegram } = await import("@/lib/notifications.server");
+        try {
+          const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-        const { error } = await supabaseAdmin.from("leads").insert({
-          name: lead.name,
-          email: lead.email,
-          phone: lead.phone,
-          project_type: lead.projectType,
-          description: lead.description ?? "",
-          preferred_contact: lead.preferredContact,
-          source: "website",
-        });
+          const { error } = await supabaseAdmin.from("leads").insert({
+            name: lead.name,
+            email: lead.email,
+            phone: lead.phone,
+            project_type: lead.projectType,
+            description: lead.description ?? "",
+            preferred_contact: lead.preferredContact,
+            source: "website",
+          });
 
-        if (error) {
-          console.error("[leads] insert failed", error);
-          return Response.json({ error: "Could not save your request" }, { status: 500 });
+          if (error) {
+            console.error("[leads] supabase insert failed:", JSON.stringify(error));
+            return Response.json({ error: "Could not save your request", detail: error.message }, { status: 500 });
+          }
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          console.error("[leads] supabase error:", msg);
+          return Response.json({ error: "Database error", detail: msg }, { status: 500 });
         }
 
-        // Fire-and-forget notifications (mocked for now)
-        await Promise.allSettled([sendLeadEmail(lead), sendLeadTelegram(lead)]);
+        try {
+          const { sendLeadEmail, sendLeadTelegram } = await import("@/lib/notifications.server");
+          await Promise.allSettled([sendLeadEmail(lead), sendLeadTelegram(lead)]);
+        } catch (err) {
+          console.error("[leads] notification error:", err instanceof Error ? err.message : err);
+        }
 
         return Response.json({ ok: true });
       },
